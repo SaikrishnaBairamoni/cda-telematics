@@ -5,10 +5,6 @@ on:
   push:
     branches: [develop, master,test_gha_fix]
 
-on:
-  pull_request:
-  push:
-
 jobs:
   carma_cloud_bridge_coverage:
     runs-on: ubuntu-latest
