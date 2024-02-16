@@ -137,7 +137,7 @@ jobs:
       image: ros:foxy
       options: --user root
     env:
-      ROSBAG2_PROCESSING_SERVICE_PATH: ${{ github.workspace }}/src/telematic_system/historical_data_processing/rosbag2_processing_service
+      ROSBAG2_PROCESSING_SERVICE_PATH: $GITHUB_WORKSPACE/src/cda-telematics/telematic_system/historical_data_processing/rosbag2_processing_service/
     steps:
       - name: Checkout ${{ github.event.repository.name }}
         uses: actions/checkout@v3
