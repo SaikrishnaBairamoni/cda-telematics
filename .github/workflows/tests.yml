@@ -1,4 +1,9 @@
-name: "Tests"
+name: "CI: Run tests"
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [develop, master,test_gha_fix]
 
 on:
   pull_request:
@@ -146,7 +151,7 @@ jobs:
         shell: bash
         run: |
           apt-get update
-          apt-get -y install python3-coverage python3-pip python3-pytest python3-pytest-asyncio ros-foxy-rclpy unzip 
+          apt-get -y install python3-coverage python3-pip python3-pytest python3-pytest-asyncio ros-foxy-rclpy unzip
           python3 -m pip install nats-py influxdb influxdb_client mcap-ros2-support pathlib pytest-env
           apt install -y apt-utils python3-pybind11 ros-foxy-test-msgs python3-colcon-common-extensions
           cd $GITHUB_WORKSPACE/telematic_system/historical_data_processing/rosbag2_processing_service
@@ -163,13 +168,13 @@ jobs:
       - name: Find coverage.xml
         shell: bash
         run: |
-          find "$GITHUB_WORKSPACE" -name "coverage.xml"          
+          find "$GITHUB_WORKSPACE" -name "coverage.xml"
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
           name: rosbag2-processing-service
           path: telematic_system/historical_data_processing/rosbag2_processing_service/coverage.xml
-          if-no-files-found: error         
+          if-no-files-found: error
   sonar:
     # Remove cloud bridge and vehicle bridge coverage temporarily as test build failed
     needs: [telematic_cloud_messaging_coverage, web_app_client_coverage, web_app_server_coverage, rosbag2_processing_service_coverage]
@@ -205,7 +210,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: rosbag2-processing-service
-          path: telematic_system/historical_data_processing/rosbag2_processing_service/       
+          path: telematic_system/historical_data_processing/rosbag2_processing_service/
       - name: Download web app server code coverage results
         uses: actions/download-artifact@v3
         with:
@@ -222,9 +227,9 @@ jobs:
       #     for coverage_file in ["/home/runner/work/cda-telematics/cda-telematics/carma_cloud_bridge/coverage.xml", "/home/runner/work/cda-telematics/cda-telematics/carma_vehicle_bridge/coverage.xml"] :
       #       with open(coverage_file, 'r') as coverage :
       #         coverage_content = coverage.read()
-            
+
       #       coverage_content = coverage_content.replace('/__w/', '/home/runner/work/')
-            
+
       #       with open(coverage_file, 'w') as coverage:
       #         coverage.write(coverage_content)
       - name: Move web app client and server code coverage files into one
@@ -233,7 +238,7 @@ jobs:
             mkdir coverage
             mv server/coverage/lcov.info coverage/lcov_server.info
             mv client/coverage/lcov.info coverage/lcov_client.info
-            npm install -g lcov-result-merger 
+            npm install -g lcov-result-merger
             npx lcov-result-merger 'coverage/lcov_*.info' 'coverage/lcov.info'
             cat coverage/lcov.info
       - name: Find lcov*.info
