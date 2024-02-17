@@ -202,12 +202,12 @@ jobs:
         with:
           name: web-app-client
           path: telematic_system/telematic_apps/web_app/client/coverage
-      - run: ls -la && pwd         
+      - run: cd telematic_system/historical_data_processing/rosbag2_processing_service && ls -la && pwd         
       - name: Download rosbag2-processing-service code coverage results
         uses: actions/download-artifact@v3
         with:
           name: rosbag2-processing-service
-          path: cda-telematics/cda-telematics/src/cda-telematics/telematic_system/historical_data_processing/rosbag2_processing_service/coverage.xml       
+          path: $GITHUB_WORKSPACE/src/cda-telematics/telematic_system/historical_data_processing/rosbag2_processing_service/coverage.xml       
       - name: Download web app server code coverage results
         uses: actions/download-artifact@v3
         with:
