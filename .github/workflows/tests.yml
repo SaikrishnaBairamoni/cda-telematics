@@ -159,6 +159,7 @@ jobs:
         shell: bash
         run: |
           source install/setup.bash
+          ls -la && pwd
           cd ${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}
           python3 -m coverage run -m pytest
           python3 -m coverage xml --omit="/opt/*,/root/*,/tmp/*,/usr/*,/var/*,**/__init__.py"
