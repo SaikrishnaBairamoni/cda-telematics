@@ -169,7 +169,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: rosbag2-processing-service-coverage
-          path: $GITHUB_WORKSPACE/${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}/coverage.xml
+          path: ${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}/coverage.xml
           if-no-files-found: error    
   sonar:
     # Remove cloud bridge and vehicle bridge coverage temporarily as test build failed
