@@ -137,7 +137,7 @@ jobs:
       image: ros:foxy
       options: --user root
     env:
-      ROSBAG2_PROCESSING_SERVICE_PATH: $GITHUB_WORKSPACE/src/cda-telematics/telematic_system/historical_data_processing/rosbag2_processing_service/
+      ROSBAG2_PROCESSING_SERVICE_PATH: ${{ github.workspace }}/src/cda-telematics/telematic_system/historical_data_processing/rosbag2_processing_service
     steps:
       - name: Checkout ${{ github.event.repository.name }}
         uses: actions/checkout@v3
@@ -153,8 +153,7 @@ jobs:
           apt install -y apt-utils python3-pybind11 ros-foxy-test-msgs python3-colcon-common-extensions
           cd src/
           git clone https://github.com/ros2/rosbag2.git --branch foxy-future
-          cd .. 
-          source /opt/ros/foxy/setup.bash
+          cd .. && source /opt/ros/foxy/setup.bash
           colcon build --packages-up-to rosbag2_processing_service
       - name: Run tests
         shell: bash
@@ -172,8 +171,7 @@ jobs:
         with:
           name: rosbag2-processing-service-coverage
           path: ${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}/coverage.xml
-          if-no-files-found: error
-       
+          if-no-files-found: error    
   sonar:
     # Remove cloud bridge and vehicle bridge coverage temporarily as test build failed
     needs: [telematic_cloud_messaging_coverage, web_app_client_coverage, web_app_server_coverage, rosbag2_processing_service_coverage]
