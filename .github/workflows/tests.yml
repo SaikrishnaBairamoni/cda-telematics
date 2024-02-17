@@ -206,7 +206,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: rosbag2-processing-service
-          path: $GITHUB_WORKSPACE/${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}/coverage.xml       
+          path: ${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}/coverage.xml       
       - name: Download web app server code coverage results
         uses: actions/download-artifact@v3
         with:
