@@ -207,7 +207,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: rosbag2-processing-service
-          path: telematic_system/historical_data_processing/rosbag2_processing_service/coverage.xml       
+          path: /home/runner/work/cda-telematics/cda-telematics/telematic_system/historical_data_processing/rosbag2_processing_service/coverage.xml       
       - name: Download web app server code coverage results
         uses: actions/download-artifact@v3
         with:
