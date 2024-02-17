@@ -202,7 +202,7 @@ jobs:
         with:
           name: web-app-client
           path: telematic_system/telematic_apps/web_app/client/coverage
-      - run: las -la && pwd    
+      - run: ls -la && pwd    
       - name: Find coverage.xml
         shell: bash
         run: |
