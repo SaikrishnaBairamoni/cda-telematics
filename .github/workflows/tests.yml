@@ -202,10 +202,11 @@ jobs:
         with:
           name: web-app-client
           path: telematic_system/telematic_apps/web_app/client/coverage
+      - run: las -la && pwd    
       - name: Find coverage.xml
         shell: bash
         run: |
-          find "$GITHUB_WORKSPACE" -name "coverage.xml"         
+          find "${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}" -name "coverage.xml"         
       - name: Download rosbag2-processing-service code coverage results
         uses: actions/download-artifact@v3
         with:
