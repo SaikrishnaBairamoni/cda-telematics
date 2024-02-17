@@ -164,7 +164,7 @@ jobs:
       - name: Find coverage.xml
         shell: bash
         run: |
-          find "${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}" -name "coverage.xml"          
+          find "$GITHUB_WORKSPACE/${{ env.ROSBAG2_PROCESSING_SERVICE_PATH }}" -name "coverage.xml"          
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
