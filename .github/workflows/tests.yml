@@ -85,7 +85,7 @@ jobs:
               apt install -y apt-utils python3-pybind11 ros-foxy-test-msgs python3-colcon-common-extensions
               cd ${{ env.WORKSPACE_PATH }}/src/
               git clone https://github.com/ros2/rosbag2.git --branch foxy-future
-              cd .. 
+              cd ..
               source /opt/ros/foxy/setup.bash
               colcon build --packages-up-to rosbag2_processing_service
 
