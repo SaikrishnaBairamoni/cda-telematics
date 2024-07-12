@@ -25,6 +25,10 @@ jobs:
       build_date: ${{ steps.build-metadata.outputs.build_date }}
       vcs_ref: ${{ steps.build-metadata.outputs.vcs_ref }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0       
       - name: Determine Build Metadata
         id: build-metadata
         uses: usdot-fhwa-stol/actions/docker-build-metadata@main
